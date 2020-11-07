@@ -1,9 +1,2 @@
-# My-study-history
-### 2020년 6월 ~ 8월 목표
-    1. 국방부 오픈소스 아카데미 참가
-    2. 기본적인 자료구조 알기 (자료구조 과제 1,2,3)
-    3. 프로그래머스 문제 풀기
-    3-1. 7월 31일까지 LV2 하루에 3문제
-    3-2. 8월 15일까지 LV3 하루에 2문제
-    3-3. 8월 31일까지 LV4 하루에 1문제
-* * *
+# [My-Problem-Solving](https://docs.google.com/spreadsheets/d/1xBKG4Do-VVwdIBDpza0Vfmo4btMnJkrZ8GriKAqBEhE/edit?usp=sharing)
+코딩 테스트를 대비하는 과정을 저장한다.
