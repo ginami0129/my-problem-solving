@@ -1,7 +1,7 @@
 ---
 name: Problem request
 about: Suggest an problem for this project
-title: ''
+title: Create BOJ_1000.cpp
 labels: Problem solving
 assignees: ginami0129g
 
