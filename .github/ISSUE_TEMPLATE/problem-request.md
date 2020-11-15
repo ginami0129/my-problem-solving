@@ -11,8 +11,5 @@ assignees: ginami0129g
 
 > ### [A+B](https://www.acmicpc.net/problem/1000)
 
-## Algorithm
-> ### I/O
-
 ## Prior knowledge
 > ### None.
