@@ -19,7 +19,7 @@ int main(void) {
     } else if (input == "pop") {
       cout << (front > rear ? -1 : queue[front++]) << '\n';
     } else if (input == "size") {
-      cout << max(0, rear - front + 1) << '\n';
+      cout << rear - front + 1 << '\n';
     } else if (input == "empty") {
       cout << (front > rear) << '\n';
     } else if (input == "front") {
