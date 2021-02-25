@@ -9,11 +9,11 @@ int main(void) {
   cin.tie(NULL);
   while (cin.getline(input, MAX)) {
     for (int i = 0; input[i]; ++i) {
-      if (input[i] >= 'a' && input[i] <= 'z') {
+      if (input[i] >= 'a') {
         ++d[0];
-      } else if (input[i] >= 'A' && input[i] <= 'Z') {
+      } else if (input[i] >= 'A') {
         ++d[1];
-      } else if (input[i] >= '0' && input[i] <= '9') {
+      } else if (input[i] >= '0') {
         ++d[2];
       } else if (input[i] == ' ') {
         ++d[3];
