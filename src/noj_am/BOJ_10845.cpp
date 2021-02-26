@@ -1,13 +1,12 @@
 #include <iostream>
 #include <string>
-#define MAX 100000
+#define MAX 10000
 using namespace std;
 
 int main(void) {
   int N;
-  int queue[MAX] = {0};
   int front = 0, rear = -1;
-  int count;
+  int queue[MAX] = {0};
   string input;
   ios_base::sync_with_stdio(false);
   cin.tie(NULL);
