@@ -3,39 +3,38 @@
 using namespace std;
 
 typedef struct Node {
-  char c;
+  char data;
   Node* prev;
   Node* next;
 } Node;
 
 int main(void) {
   char input[MAX] = {0};
-  int N;
-  Node* head = new Node;
-  Node* tail = new Node;
-  head->prev = nullptr;
+  char command;
+  int M;
+  Node* cursor = nullptr;
+  Node* node = nullptr;
+  Node* head = new Node();
+  Node* tail = new Node();
   head->next = tail;
+  head->prev = nullptr;
   tail->prev = head;
-  tail->next = nullptr;
+  tail->prev = nullptr;
   ios_base::sync_with_stdio(false);
   cin.tie(NULL);
   cin >> input;
-  Node* cursor = head;
-  Node* node = nullptr;
-  for (int i = 0; input[i]; ++i) {
+  cursor = head;
+  for (int i = 0; input[i]; ++i, cursor = cursor->next) {
     node = new Node();
-    node->c = input[i];
-    node->next = cursor->next;
+    node->data = input[i];
     node->prev = cursor;
+    node->next = cursor->next;
     cursor->next->prev = node;
     cursor->next = node;
-    cursor = cursor->next;
   }
-  cursor = cursor->next;
-  cin >> N;
-  char command, data;
-  Node* temp = nullptr;
-  while (N--) {
+  cursor = tail;
+  cin >> M;
+  while (M--) {
     cin >> command;
     if (command == 'L') {
       if (cursor->prev->prev != nullptr) {
@@ -47,25 +46,22 @@ int main(void) {
       }
     } else if (command == 'B') {
       if (cursor->prev->prev != nullptr) {
-        temp = cursor->prev;
-        temp->prev->next = cursor;
-        cursor->prev = temp->prev;
-        delete (temp);
+        node = cursor->prev;
+        cursor->prev = node->prev;
+        node->prev->next = cursor;
+        delete (node);
       }
     } else if (command == 'P') {
-      cin >> data;
-      temp = new Node;
-      temp->c = data;
-      temp->next = cursor;
-      temp->prev = cursor->prev;
-      cursor->prev->next = temp;
-      cursor->prev = temp;
+      node = new Node();
+      cin >> node->data;
+      node->next = cursor;
+      node->prev = cursor->prev;
+      cursor->prev->next = node;
+      cursor->prev = node;
     }
   }
-  temp = head->next;
-  while (temp->next) {
-    cout << temp->c;
-    temp = temp->next;
+  for (cursor = head->next; cursor->next; cursor = cursor->next) {
+    cout << cursor->data;
   }
   cout << '\n';
 }
