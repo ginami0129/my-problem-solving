@@ -3,14 +3,14 @@ using namespace std;
 
 typedef struct Node {
   int data;
-  Node *next;
+  Node* next;
 } Node;
 
 int main(void) {
   int N, K, count;
-  Node *head = new Node();
-  Node *temp = head;
-  Node *node = nullptr;
+  Node* node = nullptr;
+  Node* head = new Node;
+  Node* temp = head;
   ios_base::sync_with_stdio(false);
   cin.tie(NULL);
   cin >> N >> K;
@@ -22,7 +22,7 @@ int main(void) {
   }
   temp->next = head->next;
   cout << '<';
-  while (N > 1) {
+  while (--N) {
     count = K;
     while (--count) {
       temp = temp->next;
@@ -30,8 +30,7 @@ int main(void) {
     node = temp->next;
     temp->next = node->next;
     cout << node->data << ", ";
-    --N;
     delete (node);
   }
-  cout << temp->data << ">" << '\n';
+  cout << temp->data << ">\n";
 }
