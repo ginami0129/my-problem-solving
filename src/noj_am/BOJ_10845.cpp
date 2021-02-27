@@ -4,27 +4,28 @@
 using namespace std;
 
 int main(void) {
-  int N;
-  int front = 0, rear = -1;
+  int N, front = 0, rear = -1;
   int queue[MAX] = {0};
-  string input;
+  string command;
   ios_base::sync_with_stdio(false);
   cin.tie(NULL);
   cin >> N;
   while (N--) {
-    cin >> input;
-    if (input == "push") {
+    cin >> command;
+    if (command == "push") {
       cin >> queue[++rear];
-    } else if (input == "pop") {
-      cout << (front > rear ? -1 : queue[front++]) << '\n';
-    } else if (input == "size") {
+    } else if (command == "size") {
       cout << rear - front + 1 << '\n';
-    } else if (input == "empty") {
-      cout << (front > rear) << '\n';
-    } else if (input == "front") {
-      cout << (front > rear ? -1 : queue[front]) << '\n';
-    } else if (input == "back") {
-      cout << (front > rear ? -1 : queue[rear]) << '\n';
+    } else if (command == "empty") {
+      cout << (rear < front) << '\n';
+    } else if (rear < front) {
+      cout << -1 << '\n';
+    } else if (command == "pop") {
+      cout << queue[front++] << '\n';
+    } else if (command == "front") {
+      cout << queue[front] << '\n';
+    } else if (command == "back") {
+      cout << queue[rear] << '\n';
     }
   }
 }
