@@ -1,6 +1,4 @@
-#include <cmath>
 #include <iostream>
-#define MAX 10001
 using namespace std;
 
 int main(void) {
@@ -9,21 +7,22 @@ int main(void) {
 
   int M, N;
   cin >> M >> N;
-  bool d[MAX] = {1, 1};
-  for (int i = 2; i <= sqrt(MAX); ++i) {
-    if (d[i] == true) continue;
-    for (int j = i * i; j < MAX; j += i) {
-      d[j] = true;
+  M = max(2, M);
+  int result = 0;
+  int m = N;
+  for (int i = N; i >= M; --i) {
+    int j = 2;
+    for (; j * j <= i; ++j) {
+      if (i % j == 0) {
+        break;
+      }
+    }
+    if (j * j > i) {
+      result += i;
+      m = i;
     }
   }
-  int result = 0;
-  int m = MAX;
-  for (int i = M; i <= N; ++i) {
-    if (d[i] == true) continue;
-    m = min(m, i);
-    result += i;
-  }
-  if (m == MAX) {
+  if (result == 0) {
     cout << -1 << '\n';
   } else {
     cout << result << '\n';
