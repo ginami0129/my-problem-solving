@@ -1,25 +1,26 @@
 #include <iostream>
+#define SIZE 15000
 #define MAX 10001
 using namespace std;
+
+int d(int n) {
+  int result = n;
+  while (n > 0) {
+    result += n % 10;
+    n /= 10;
+  }
+  return result;
+}
 
 int main(void) {
   cin.tie(NULL);
   ios_base::sync_with_stdio(false);
 
-  bool d[MAX] = {0};
+  bool flag[SIZE] = {false};
   for (int i = 1; i < MAX; ++i) {
-    if (d[i] == false) {
+    if (flag[i] == false) {
       cout << i << '\n';
-    };
-    int n = i;
-    while (true) {
-      int temp = n;
-      while (temp) {
-        n += temp % 10;
-        temp /= 10;
-      }
-      if (n >= MAX || d[n] == true) break;
-      d[n] = true;
     }
+    flag[d(i)] = true;
   }
 }
