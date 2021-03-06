@@ -1,30 +1,25 @@
 #include <iostream>
-#define MAX 100001
 using namespace std;
 
 typedef struct Node {
   char data;
-  Node* prev;
-  Node* next;
+  Node *prev = nullptr;
+  Node *next = nullptr;
 } Node;
 
 int main(void) {
-  int M;
-  char str[MAX] = {0};
-  char command;
-  Node* node = nullptr;
-  Node* cursor = nullptr;
-  Node* head = new Node;
-  Node* tail = new Node;
-  head->next = tail;
-  head->prev = nullptr;
-  tail->next = nullptr;
-  tail->prev = head;
-  ios_base::sync_with_stdio(false);
   cin.tie(NULL);
+  ios_base::sync_with_stdio(false);
+
+  string str;
   cin >> str;
-  cursor = head;
-  for (int i = 0; str[i]; ++i) {
+  Node *head = new Node;
+  Node *tail = new Node;
+  head->next = tail;
+  tail->prev = head;
+  Node *cursor = head;
+  Node *node = nullptr;
+  for (int i = 0; i < str.size(); ++i) {
     node = new Node;
     node->data = str[i];
     node->prev = cursor;
@@ -33,9 +28,11 @@ int main(void) {
     cursor->next = node;
     cursor = cursor->next;
   }
-  cin >> M;
+  int N;
+  cin >> N;
   cursor = tail;
-  while (M--) {
+  while (N--) {
+    char command;
     cin >> command;
     if (command == 'L' && cursor->prev->prev) {
       cursor = cursor->prev;
@@ -49,8 +46,8 @@ int main(void) {
     } else if (command == 'P') {
       node = new Node;
       cin >> node->data;
-      node->prev = cursor->prev;
       node->next = cursor;
+      node->prev = cursor->prev;
       cursor->prev->next = node;
       cursor->prev = node;
     }
@@ -60,5 +57,4 @@ int main(void) {
     cout << cursor->data;
     cursor = cursor->next;
   }
-  cout << '\n';
 }
