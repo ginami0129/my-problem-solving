@@ -6,15 +6,16 @@ int main(void) {
   cin.tie(NULL);
   ios_base::sync_with_stdio(false);
 
-  int N, count = 0;
-  int d[26] = {0};
+  int N;
   char str[MAX] = {0};
+  int d[26] = {0};
   cin >> N;
+  int count = N;
   while (N--) {
-    cin >> str;
     fill_n(d, 26, -1);
+    cin >> str;
     for (int i = 0; str[i]; ++i) {
-      int c = str[i] - 'a';
+      char c = str[i] - 'a';
       if (d[c] == -1 || i - d[c] == 1) {
         d[c] = i;
       } else {
@@ -22,7 +23,6 @@ int main(void) {
         break;
       }
     }
-    ++count;
   }
   cout << count << '\n';
 }
