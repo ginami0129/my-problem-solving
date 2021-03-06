@@ -1,6 +1,5 @@
 #include <iostream>
 #include <stack>
-#define MAX 1000000
 using namespace std;
 
 int main(void) {
@@ -8,27 +7,23 @@ int main(void) {
   ios_base::sync_with_stdio(false);
 
   int N;
-  int A[MAX] = {0};
-  int r[MAX] = {0};
-  stack<int> s;
   cin >> N;
-  fill_n(r, N, -1);
+  int A[N] = {0};
   for (int i = 0; i < N; ++i) {
     cin >> A[i];
   }
+  stack<int> s;
+  int ans[N];
+  fill_n(ans, N, -1);
   for (int i = 0; i < N; ++i) {
-    if (s.empty() || A[s.top()] >= A[i]) {
-      s.push(i);
-    } else {
-      while (!s.empty() && A[s.top()] < A[i]) {
-        r[s.top()] = A[i];
-        s.pop();
-      }
-      s.push(i);
+    while (!s.empty() && A[s.top()] < A[i]) {
+      ans[s.top()] = A[i];
+      s.pop();
     }
+    s.push(i);
   }
   for (int i = 0; i < N; ++i) {
-    cout << r[i] << ' ';
+    cout << ans[i] << ' ';
   }
   cout << '\n';
 }
