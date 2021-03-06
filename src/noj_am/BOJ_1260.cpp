@@ -4,29 +4,28 @@
 #include <vector>
 using namespace std;
 
-void dfs(vector<int> *v, int start, vector<bool> &check) {
-  if (check[start] == true) return;
-  check[start] = true;
-  cout << start << ' ';
-  for (int i = 0; i < v[start].size(); ++i) {
-    dfs(v, v[start][i], check);
+void dfs(vector<int> *v, int vertex, vector<bool> &check) {
+  if (check[vertex] == true) return;
+  check[vertex] = true;
+  cout << vertex << ' ';
+  for (int i = 0; i < v[vertex].size(); ++i) {
+    dfs(v, v[vertex][i], check);
   }
 }
 
-void bfs(vector<int> *v, int start, vector<bool> &check) {
+void bfs(vector<int> *v, int vertex, vector<bool> &check) {
   queue<int> q;
-  q.push(start);
-  check[start] = true;
-  cout << start << ' ';
+  q.push(vertex);
+  check[vertex] = true;
   while (!q.empty()) {
     int front = q.front();
+    cout << front << ' ';
     q.pop();
     for (int i = 0; i < v[front].size(); ++i) {
       int node = v[front][i];
       if (check[node] == false) {
         q.push(node);
         check[node] = true;
-        cout << node << ' ';
       }
     }
   }
