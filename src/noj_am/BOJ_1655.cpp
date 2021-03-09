@@ -1,20 +1,20 @@
 #include <iostream>
 #include <queue>
+#include <vector>
+
 using namespace std;
 
 int main(void) {
   cin.tie(NULL);
   ios_base::sync_with_stdio(false);
 
-  int N;
+  int N, num;
   cin >> N;
-  int num;
-  cin >> num;
   priority_queue<int> small;
   priority_queue<int, vector<int>, greater<int> > big;
-  small.push(num);
-  cout << small.top() << '\n';
-  while (--N) {
+  small.push(-10000);
+  big.push(10000);
+  while (N--) {
     cin >> num;
     if (small.top() < num) {
       big.push(num);
@@ -28,6 +28,6 @@ int main(void) {
       small.push(big.top());
       big.pop();
     }
-    cout << min(small.top(), big.top()) << '\n';
+    cout << small.top() << '\n';
   }
 }
