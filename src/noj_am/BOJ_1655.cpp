@@ -1,19 +1,19 @@
 #include <iostream>
 #include <queue>
 #include <vector>
-
 using namespace std;
+
+int N, num;
+priority_queue<int> small;
+priority_queue<int, vector<int>, greater<int> > big;
 
 int main(void) {
   cin.tie(NULL);
   ios_base::sync_with_stdio(false);
 
-  int N, num;
-  cin >> N;
-  priority_queue<int> small;
-  priority_queue<int, vector<int>, greater<int> > big;
-  small.push(-10000);
+  small.push(-100000);
   big.push(10000);
+  cin >> N;
   while (N--) {
     cin >> num;
     if (small.top() < num) {
