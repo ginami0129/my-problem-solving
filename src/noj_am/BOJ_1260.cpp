@@ -4,16 +4,20 @@
 #include <vector>
 using namespace std;
 
-void dfs(vector<int> *v, int vertex, vector<bool> &check) {
+vector<int> v[1001];
+vector<bool> check(1001, false);
+int N, M, V;
+
+void dfs(int vertex) {
   if (check[vertex] == true) return;
   check[vertex] = true;
   cout << vertex << ' ';
   for (int i = 0; i < v[vertex].size(); ++i) {
-    dfs(v, v[vertex][i], check);
+    dfs(v[vertex][i]);
   }
 }
 
-void bfs(vector<int> *v, int vertex, vector<bool> &check) {
+void bfs(int vertex) {
   queue<int> q;
   q.push(vertex);
   check[vertex] = true;
@@ -23,10 +27,9 @@ void bfs(vector<int> *v, int vertex, vector<bool> &check) {
     q.pop();
     for (int i = 0; i < v[front].size(); ++i) {
       int node = v[front][i];
-      if (check[node] == false) {
-        q.push(node);
-        check[node] = true;
-      }
+      if (check[node] == true) continue;
+      check[node] = true;
+      q.push(node);
     }
   }
 }
@@ -35,9 +38,7 @@ int main(void) {
   cin.tie(NULL);
   ios_base::sync_with_stdio(false);
 
-  int N, M, V;
   cin >> N >> M >> V;
-  vector<int> v[N + 1];
   for (int i = 0; i < M; ++i) {
     int from, to;
     cin >> from >> to;
@@ -47,10 +48,9 @@ int main(void) {
   for (int i = 0; i < N; ++i) {
     sort(v[i].begin(), v[i].end());
   }
-  vector<bool> check(N + 1, false);
-  dfs(v, V, check);
+  dfs(V);
   cout << '\n';
   check.assign(N + 1, false);
-  bfs(v, V, check);
+  bfs(V);
   cout << '\n';
 }
