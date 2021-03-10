@@ -1,16 +1,17 @@
 #include <iostream>
-#define MAX 51
 using namespace std;
 
-int x[4] = {1, -1, 0, 0};
-int y[4] = {0, 0, 1, -1};
+bool v[51][51];
+int T, N, M, K, ans;
+int dx[] = {1, -1, 0, 0}, dy[] = {0, 0, 1, -1};
 
-bool dfs(bool map[][MAX], int N, int M, int i, int j) {
-  if (i < 0 || i >= N | j < 0 || j >= M) return false;
-  if (map[i][j] == false) return false;
-  map[i][j] = false;
+bool dfs(int i, int j) {
+  if (i < 0 || i >= N || j < 0 || j >= M) return false;
+  if (v[i][j] == false) return false;
+  v[i][j] = 0;
   for (int d = 0; d < 4; ++d) {
-    dfs(map, N, M, i + x[d], j + y[d]);
+    int x = i + dx[d], y = j + dy[d];
+    dfs(x, y);
   }
   return true;
 }
@@ -19,25 +20,22 @@ int main(void) {
   cin.tie(NULL);
   ios_base::sync_with_stdio(false);
 
-  int T;
   cin >> T;
-  int M, N, K;
   while (T--) {
-    bool map[MAX][MAX] = {0};
-    cin >> M >> N >> K;
+    cin >> N >> M >> K;
     for (int i = 0; i < K; ++i) {
       int x, y;
       cin >> x >> y;
-      map[y][x] = true;
+      v[x][y] = 1;
     }
-    int result = 0;
+    ans = 0;
     for (int i = 0; i < N; ++i) {
       for (int j = 0; j < M; ++j) {
-        if (dfs(map, N, M, i, j)) {
-          ++result;
-        };
+        if (dfs(i, j)) {
+          ++ans;
+        }
       }
     }
-    cout << result << '\n';
+    cout << ans << '\n';
   }
 }
