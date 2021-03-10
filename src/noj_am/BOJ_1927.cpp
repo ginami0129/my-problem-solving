@@ -1,6 +1,8 @@
 #include <iostream>
-#define MAX 100000
 using namespace std;
+
+int heap[100001];
+int size, n, x, c, p;
 
 void swap(int &a, int &b) {
   int temp = a;
@@ -12,38 +14,35 @@ int main(void) {
   cin.tie(NULL);
   ios_base::sync_with_stdio(false);
 
-  int N;
-  cin >> N;
-  int d[MAX] = {0};
-  int count = 0;
-  while (N--) {
-    int num;
-    cin >> num;
-    if (num > 0 || num < 0) {
-      d[count] = num;
-      int child = count;
-      int parent = (child - 1) / 2;
-      while (child > 0 && d[parent] > d[child]) {
-        swap(d[parent], d[child]);
-        child = parent;
-        parent = (child - 1) / 2;
+  int n;
+  cin >> n;
+  while (n--) {
+    int x;
+    cin >> x;
+    if (x > 0) {
+      heap[size++] = x;
+      c = size - 1;
+      p = (c - 1) / 2;
+      while (c > 0 && heap[c] < heap[p]) {
+        swap(heap[c], heap[p]);
+        c = p;
+        p = (c - 1) / 2;
       }
-      ++count;
-    } else if (count == 0) {
+    } else if (size == 0) {
       cout << 0 << '\n';
     } else {
-      cout << d[0] << '\n';
-      d[0] = d[count - 1];
-      count = count - 1;
-      int parent = 0;
-      while (parent < count && 2 * parent + 1 < count) {
-        int child = 2 * parent + 1;
-        if (child + 1 < count && d[child] > d[child + 1]) {
-          child = child + 1;
+      cout << heap[0] << '\n';
+      heap[0] = heap[--size];
+      p = 0;
+      c = 2 * p + 1;
+      while (p < size && c < size) {
+        if (c + 1 < size && heap[c] > heap[c + 1]) {
+          c = c + 1;
         }
-        if (d[child] < d[parent]) {
-          swap(d[child], d[parent]);
-          parent = child;
+        if (heap[c] < heap[p]) {
+          swap(heap[c], heap[p]);
+          p = c;
+          c = 2 * p + 1;
         } else
           break;
       }
