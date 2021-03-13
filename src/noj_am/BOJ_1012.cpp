@@ -2,16 +2,15 @@
 using namespace std;
 
 bool v[51][51];
-int T, N, M, K, ans;
-int dx[] = {1, -1, 0, 0}, dy[] = {0, 0, 1, -1};
+int T, M, N, K;
+int d[] = {0, 0, -1, 1};
 
-bool dfs(int i, int j) {
-  if (i < 0 || i >= N || j < 0 || j >= M) return false;
-  if (v[i][j] == false) return false;
-  v[i][j] = 0;
-  for (int d = 0; d < 4; ++d) {
-    int x = i + dx[d], y = j + dy[d];
-    dfs(x, y);
+bool dfs(int x, int y) {
+  if (x < 0 || y < 0 || x >= N || y >= M) return false;
+  if (v[x][y] == false) return false;
+  v[x][y] = false;
+  for (int i = 0; i < 4; ++i) {
+    dfs(x + d[i], y + d[3 - i]);
   }
   return true;
 }
@@ -22,20 +21,20 @@ int main(void) {
 
   cin >> T;
   while (T--) {
-    cin >> N >> M >> K;
+    cin >> M >> N >> K;
     for (int i = 0; i < K; ++i) {
       int x, y;
-      cin >> x >> y;
-      v[x][y] = 1;
+      cin >> y >> x;
+      v[x][y] = true;
     }
-    ans = 0;
+    int r = 0;
     for (int i = 0; i < N; ++i) {
       for (int j = 0; j < M; ++j) {
         if (dfs(i, j)) {
-          ++ans;
+          ++r;
         }
       }
     }
-    cout << ans << '\n';
+    cout << r << '\n';
   }
 }
