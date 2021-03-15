@@ -12,24 +12,24 @@ int main(void) {
 
   cin >> N >> K;
   q.push(N);
-  check[N] = true;
+  check[N] = 1;
   while (!q.empty()) {
     int cur = q.front();
     if (cur == K) {
       cout << check[cur] - 1 << '\n';
-      return 0;
+      break;
     }
     if (cur + 1 < 100001 && !check[cur + 1]) {
-      q.push(cur + 1);
       check[cur + 1] = check[cur] + 1;
+      q.push(cur + 1);
     }
     if (cur - 1 >= 0 && !check[cur - 1]) {
-      q.push(cur - 1);
       check[cur - 1] = check[cur] + 1;
+      q.push(cur - 1);
     }
     if (cur * 2 < 100001 && !check[cur * 2]) {
-      q.push(cur * 2);
       check[cur * 2] = check[cur] + 1;
+      q.push(cur * 2);
     }
     q.pop();
   }
