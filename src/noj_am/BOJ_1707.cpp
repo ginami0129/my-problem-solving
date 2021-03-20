@@ -3,27 +3,26 @@
 #include <vector>
 using namespace std;
 
-vector<int> v[20001];
-vector<int> check(20001, 0);
-queue<int> q;
 int K, V, E;
+vector<int> v[20001];
+vector<int> check(20001, false);
+queue<int> q;
 
 bool bfs(int V) {
   q.push(V);
-  check[V] = 1;
+  check[V] = -1;
   while (!q.empty()) {
     int front = q.front();
-    q.pop();
     for (int i = 0; i < v[front].size(); ++i) {
       int node = v[front][i];
       if (check[node] == 0) {
         check[node] = -1 * check[front];
         q.push(node);
       } else if (check[node] == check[front]) {
-        while (!q.empty()) q.pop();
         return false;
       }
     }
+    q.pop();
   }
   return true;
 }
@@ -35,9 +34,10 @@ int main(void) {
   cin >> K;
   while (K--) {
     cin >> V >> E;
-    check.assign(V + 1, 0);
-    for (int i = 0; i <= V; ++i) {
+    while (!q.empty()) q.pop();
+    for (int i = 1; i <= V; ++i) {
       v[i].clear();
+      check[i] = 0;
     }
     for (int i = 0; i < E; ++i) {
       int from, to;
