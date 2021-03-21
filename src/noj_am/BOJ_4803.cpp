@@ -2,16 +2,17 @@
 #include <vector>
 using namespace std;
 
-int n, m, j;
+int n, m, j, ans;
 vector<int> v[501];
-vector<int> d(501, 0);
+vector<bool> check(501, false);
 
-bool dfs(int x, int p) {
-  d[x] = true;
-  for (int i = 0; i < v[x].size(); i++) {
-    if (v[x][i] == p) continue;
-    if (d[v[x][i]] == true) return true;
-    if (dfs(v[x][i], x)) return true;
+bool dfs(int V, int p) {
+  if (check[V] == true) return true;
+  check[V] = true;
+  for (int i = 0; i < v[V].size(); ++i) {
+    int c = v[V][i];
+    if (v[V][i] == p) continue;
+    if (dfs(c, V) == true) return true;
   }
   return false;
 }
@@ -26,26 +27,25 @@ int main(void) {
     if (n == 0 && m == 0) break;
     for (int i = 1; i <= n; ++i) {
       v[i].clear();
-      d[i] = false;
+      check[i] = false;
     }
-    for (int i = 0; i < m; ++i) {
+    for (int i = 1; i <= m; ++i) {
       int from, to;
       cin >> from >> to;
       v[from].push_back(to);
       v[to].push_back(from);
     }
-    int count = 0;
+    ans = 0;
     for (int i = 1; i <= n; ++i) {
-      if (d[i] == true) continue;
-      count += (dfs(i, 0) ? 0 : 1);
+      ans += !dfs(i, 0);
     }
     cout << "Case " << j << ": ";
-    if (count == 0) {
-      cout << "No trees." << '\n';
-    } else if (count == 1) {
+    if (ans > 1) {
+      cout << "A forest of " << ans << " trees." << '\n';
+    } else if (ans == 1) {
       cout << "There is one tree." << '\n';
     } else {
-      cout << "A forest of " << count << " trees." << '\n';
+      cout << "No trees." << '\n';
     }
   }
 }
