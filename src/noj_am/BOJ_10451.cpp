@@ -1,19 +1,18 @@
-#include <iostream>
-#include <vector>
+#include <bits/stdc++.h>
 using namespace std;
 
-int T, N, v[1001], ans;
-vector<bool> visited(1001, false), finished(1001, false);
+int T, N, cnt;
+vector<int> v(1001, 0);
+vector<bool> check(1001, false);
 
 void dfs(int V) {
-  visited[V] = true;
+  check[V] = true;
   int next = v[V];
-  if (visited[next] == false) {
+  if (check[next] == false) {
     dfs(next);
-  } else if (finished[next] == false) {
-    ++ans;
+  } else if (check[next] == true) {
+    ++cnt;
   }
-  finished[V] = true;
 }
 
 int main(void) {
@@ -23,17 +22,15 @@ int main(void) {
   cin >> T;
   while (T--) {
     cin >> N;
-    for (int from = 1; from <= N; ++from) {
-      int to;
-      cin >> to;
-      v[from] = to;
-      visited[from] = finished[from] = false;
-    }
-    ans = 0;
+    cnt = 0;
+    check.assign(N + 1, false);
     for (int i = 1; i <= N; ++i) {
-      if (visited[i] == true) continue;
+      cin >> v[i];
+    }
+    for (int i = 1; i <= N; ++i) {
+      if (check[i] == true) continue;
       dfs(i);
     }
-    cout << ans << '\n';
+    cout << cnt << '\n';
   }
 }
