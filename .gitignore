@@ -4,3 +4,4 @@ a
 .vscode/
 .prettierrc
 TODO
+.DS_Store
