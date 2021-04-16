@@ -17,12 +17,6 @@ int main(void) {
       for (int k = 1; k <= str[2].size(); ++k) {
         if (str[0][i - 1] == str[1][j - 1] && str[1][j - 1] == str[2][k - 1]) {
           d[i][j][k] = d[i - 1][j - 1][k - 1] + 1;
-        } else if (str[0][i - 1] == str[1][j - 1]) {
-          d[i][j][k] = max(d[i - 1][j - 1][k], d[i][j][k - 1]);
-        } else if (str[1][j - 1] == str[2][k - 1]) {
-          d[i][j][k] = max(d[i][j - 1][k - 1], d[i - 1][j][k]);
-        } else if (str[0][i - 1] == str[2][k - 1]) {
-          d[i][j][k] = max(d[i - 1][j][k - 1], d[i][j - 1][k]);
         } else {
           d[i][j][k] = max(d[i - 1][j][k], max(d[i][j - 1][k], d[i][j][k - 1]));
         }
