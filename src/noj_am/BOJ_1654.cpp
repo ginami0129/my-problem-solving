@@ -1,30 +1,32 @@
 #include <bits/stdc++.h>
+#define MAX 10000
 using namespace std;
 
-int K, N, cnt;
-int arr[10000];
+int k, n, arr[MAX];
 
 int main(void) {
-  ios_base::sync_with_stdio(false);
   cin.tie(NULL);
+  ios_base::sync_with_stdio(false);
 
-  cin >> K >> N;
-  for (int i = 0; i < K; ++i) {
+  cin >> k >> n;
+  for (int i = 0; i < k; ++i) {
     cin >> arr[i];
   }
-  long long start = 1;
-  long long end = (1 << 31) - 1;
-  while (start <= end) {
-    long long mid = (start + end) / 2;
-    cnt = 0;
-    for (int i = 0; i < K; ++i) {
-      cnt += arr[i] / mid;
+  
+  long long low = 1;
+  int high = INT_MAX;
+
+  while (low <= high) {
+    long long mid = (low + high) / 2;
+    int sum = 0;
+    for (int i = 0; i < k; ++i) {
+      sum += arr[i] / mid;
     }
-    if (cnt < N) {
-      end = mid - 1;
+    if (sum < n) {
+      high = mid - 1;
     } else {
-      start = mid + 1;
+      low = mid + 1;
     }
   }
-  cout << end << '\n';
+  cout << high << '\n';
 }
