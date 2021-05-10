@@ -1,20 +1,20 @@
-#include <iostream>
-#include <algorithm>
-#include <cmath>
-#define MAX_SIZE 100001
+// 1699 제곱수의 합
+#include <bits/stdc++.h>
+#define MAX 100001
 using namespace std;
 
+int n, d[MAX];
+
 int main(void) {
-  int N, temp;
-  int d[MAX_SIZE] ={0, };
-  ios_base::sync_with_stdio(false);
   cin.tie(NULL);
-  cin >> N;
-  for (int i = 1; i <= N; ++i) {
+  ios_base::sync_with_stdio(false);
+
+  cin >> n;
+  for (int i = 1; i <= n; ++i) {
     d[i] = i;
-    for (int j = sqrt(i); j > 0; --j) {
-      d[i] = min(d[i], 1 + d[i - j*j]);
+    for (int j = 2; j * j <= i; ++j) {
+      d[i] = min(d[i], 1 + d[i - j * j]);
     }
   }
-  cout << d[N] << '\n';
+  cout << d[n] << '\n';
 }
